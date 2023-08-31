@@ -371,6 +371,7 @@ h1 {
     max-width: 475px;
     height: 100vh;
     background-image: url(./img/pikachu_pokemon_minimalbg.jpg);
+    background-color: #ebe40a;
     background-size: contain;
     overflow-y: scroll;
     overflow-x: hidden;
