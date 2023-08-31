@@ -23,6 +23,7 @@
 
 body {
     background-image: url(./img/pkmnbodybg.png);
+    background-color: yellow;
     background-size:contain;
     backdrop-filter: blur(0.5px);
     background-color: black;
