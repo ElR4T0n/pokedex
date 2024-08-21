@@ -58,9 +58,6 @@ function mostrarMovimientos(movimientos) {
 }
 
 
-
-
-
 function mostrarPokemon(pokemon) {
     const { id: id, name: nombre, sprites: { front_default: fotoPrincipal }, types: tipos, abilities: habilidades, moves: movimientos, } = pokemon;
     actualizarTextoAyuda();
