@@ -199,10 +199,20 @@ function manejarCambioPagina(e) {
 
 function mostrarPaginador(totalPokemones, paginaActual, urlAnterior, urlSiguiente) {
     const POKEMONES_POR_PAGINA = 20;
+    const MAX_PAGINAS_VISIBLES = 10; // Máximo número de páginas visibles en el paginador
     const $paginador = document.querySelector("#paginador");
     $paginador.innerHTML = "";
 
     const totalPaginas = Math.ceil(totalPokemones / POKEMONES_POR_PAGINA);
+
+    // Cálculo del rango de páginas a mostrar
+    let inicioPagina = Math.max(1, paginaActual - Math.floor(MAX_PAGINAS_VISIBLES / 2));
+    let finPagina = Math.min(totalPaginas, inicioPagina + MAX_PAGINAS_VISIBLES - 1);
+
+    // Ajuste si estamos al inicio o final del conjunto de páginas
+    if (finPagina - inicioPagina < MAX_PAGINAS_VISIBLES - 1) {
+        inicioPagina = Math.max(1, finPagina - MAX_PAGINAS_VISIBLES + 1);
+    }
 
     const $paginaAnterior = crearItemPaginador("Prev.", urlAnterior);
 
@@ -213,10 +223,10 @@ function mostrarPaginador(totalPokemones, paginaActual, urlAnterior, urlSiguient
     }
     $paginador.appendChild($paginaAnterior);
 
-    for (let i = 0; i < totalPaginas; i += 1) {
-        const numeroPagina = i + 1;
-        const $pagina = crearItemPaginador(numeroPagina);
-        if (i === (paginaActual - 1)) {
+    // Añadir páginas del rango calculado
+    for (let i = inicioPagina; i <= finPagina; i += 1) {
+        const $pagina = crearItemPaginador(i, `?offset=${(i - 1) * POKEMONES_POR_PAGINA}&limit=${POKEMONES_POR_PAGINA}`);
+        if (i === paginaActual) {
             $pagina.classList.add("active");
         }
         $paginador.appendChild($pagina);
