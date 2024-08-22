@@ -1,6 +1,46 @@
 function actualizarTextoAyuda(texto) {
     const $ayuda = document.querySelector("#ayuda");
-    $ayuda.textContent = (texto);
+    $ayuda.textContent = texto;
+
+    if (texto === "LOADING POKEMON") {
+        ocultarDetallesPokemon();
+    } else {
+        mostrarDetallesPokemon();
+    }
+}
+
+function ocultarDetallesPokemon() {
+    const elementsToHide = [
+        document.querySelector("#pokemon-nombre"),
+        document.querySelector("#pokemon-id"),
+        document.querySelector("#pokemon-imagen"),
+        document.querySelector("#tipos-contenedor"),
+        document.querySelector("#habilidades-contenedor"),
+        document.querySelector('#moves'),
+    ];
+
+    elementsToHide.forEach((element) => {
+        if (element) {
+            element.style.display = "none";
+        }
+    });
+}
+
+function mostrarDetallesPokemon() {
+    const elementsToShow = [
+        document.querySelector("#pokemon-nombre"),
+        document.querySelector("#pokemon-id"),
+        document.querySelector("#pokemon-imagen"),
+        document.querySelector("#tipos-contenedor"),
+        document.querySelector("#habilidades-contenedor"),
+        document.querySelector('#moves'),
+    ];
+
+    elementsToShow.forEach((element) => {
+        if (element) {
+            element.style.display = "block";
+        }
+    });
 }
 
 function mostrarTipos(tipos) {
@@ -12,12 +52,11 @@ function mostrarTipos(tipos) {
         $tipo.className = `badge ${tipo}`
         $tipo.textContent = tipo.toUpperCase()
         $tipos.appendChild($tipo)
-    }
-    )
-};
+    });
+}
 
 function mostrarHabilidades(habilidades) {
-    const $habilidades = document.querySelector("#habilidades")
+    const $habilidades = document.querySelector("#habilidades");
     $habilidades.innerHTML = "";
 
     habilidades.forEach((habilidad) => {
@@ -25,11 +64,11 @@ function mostrarHabilidades(habilidades) {
         $habilidad.className = "badge white";
         $habilidad.textContent = habilidad.toUpperCase();
         $habilidades.appendChild($habilidad)
-    })
+    });
 }
 
 function mostrarMovimientos(movimientos) {
-    const $movimientos = document.querySelector("#movimientos")
+    const $movimientos = document.querySelector("#movimientos");
 
     $movimientos.innerHTML = "";
     movimientos.forEach((movimiento) => {
@@ -42,29 +81,27 @@ function mostrarMovimientos(movimientos) {
         $movimiento.textContent = nombreMovimiento.toUpperCase();
         $movimientoFila.appendChild($movimiento);
 
-        const $versiones = document.createElement("td")
+        const $versiones = document.createElement("td");
 
         versiones.forEach((version) => {
-            const $version = document.createElement("span")
+            const $version = document.createElement("span");
             $version.className = "badge white";
             $version.textContent = version.toUpperCase();
-            $versiones.appendChild($version)
+            $versiones.appendChild($version);
         });
 
-        $movimientoFila.appendChild($versiones)
-        $movimientos.appendChild($movimientoFila)
-            ;
+        $movimientoFila.appendChild($versiones);
+        $movimientos.appendChild($movimientoFila);
     });
 }
 
-
 function mostrarPokemon(pokemon) {
-    const { id: id, name: nombre, sprites: { front_default: fotoPrincipal }, types: tipos, abilities: habilidades, moves: movimientos, } = pokemon;
+    const { id, name: nombre, sprites: { front_default: fotoPrincipal }, types: tipos, abilities: habilidades, moves: movimientos } = pokemon;
     actualizarTextoAyuda();
 
     const $imagen = document.querySelector("#pokemon-imagen");
     $imagen.setAttribute("src", fotoPrincipal);
-    $imagen.setAttribute("alt", `Imagen de pokemon ${nombre}`)
+    $imagen.setAttribute("alt", `Imagen de pokemon ${nombre}`);
     document.querySelector("#pokemon-nombre").textContent = nombre.toUpperCase();
     document.querySelector("#pokemon-id").textContent = `#${id}`;
 
@@ -83,20 +120,29 @@ function obtenerParametrosdeURL(url) {
         offset = /offset=([0-9]+)/gi.exec(url).pop();
         limit = /limit=([0-9]+)/gi.exec(url).pop();
     } catch (e) {
-        offset = undefined
-        limit = undefined
+        offset = undefined;
+        limit = undefined;
     }
-    return { offset, limit }
+    return { offset, limit };
 }
 
 function cargarPokemon(nombre) {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`).then((r) => r.json()).then((pokemon) => {
-        mostrarPokemon(pokemon);
-        actualizarTextoAyuda();
-    });
+    actualizarTextoAyuda("LOADING POKEMON");
+
+    fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`)
+        .then((r) => r.json())
+        .then((pokemon) => {
+            mostrarPokemon(pokemon);
+            actualizarTextoAyuda("");  // Una vez cargado, el texto de ayuda podría quedar vacío o mostrar otro mensaje
+        })
+        .catch((error) => {
+            actualizarTextoAyuda("ERROR LOADING POKEMON");
+            console.error("Error al cargar el Pokémon:", error);
+        });
 }
+
 function cargarPokemones(offset = 0, limit = 20) {
-    return fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`).then((r) => r.json())
+    return fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`).then((r) => r.json());
 }
 
 function mostrarTotalPokemones(totalPokemones) {
@@ -109,33 +155,32 @@ function actualizarTextoIndicePokemones(texto) {
 }
 
 function mostrarListadoPokemones(pokemones) {
-    const $indice = document.querySelector("#indice")
+    const $indice = document.querySelector("#indice");
     $indice.innerHTML = "";
     pokemones.forEach((pokemon) => {
-        const { name: nombre } = pokemon
-        const $link = document.createElement("a")
+        const { name: nombre } = pokemon;
+        const $link = document.createElement("a");
         $link.className = "list-group-item list-group-item-action";
         $link.setAttribute("href", "#");
         $link.textContent = `${nombre.toUpperCase()}`;
         $link.addEventListener("click", () => {
             actualizarTextoAyuda("LOADING POKEMON");
-            cargarPokemon(nombre)
-        })
-        $indice.appendChild($link)
-
-    })
+            cargarPokemon(nombre);
+        });
+        $indice.appendChild($link);
+    });
 }
 
 function crearItemPaginador(texto, url = "#") {
-    const $item = document.createElement("li")
-    const $link = document.createElement("a")
-    $item.className = "page-item"
-    $link.className = "page-link"
-    $link.textContent = texto
+    const $item = document.createElement("li");
+    const $link = document.createElement("a");
+    $item.className = "page-item";
+    $link.className = "page-link";
+    $link.textContent = texto;
     $link.href = url;
     $link.dataset.pagina = texto;
     $item.appendChild($link);
-    return $item
+    return $item;
 }
 
 function manejarCambioPagina(e) {
@@ -148,7 +193,6 @@ function manejarCambioPagina(e) {
         numeroPagina = Number(pagina);
         cambiarPagina(numeroPagina);
     } else {
-
         cambiarPagina(href);
     }
 }
@@ -162,14 +206,12 @@ function mostrarPaginador(totalPokemones, paginaActual, urlAnterior, urlSiguient
 
     const $paginaAnterior = crearItemPaginador("Prev.", urlAnterior);
 
-
     if (urlAnterior) {
         $paginaAnterior.classList.remove("disabled");
-
     } else {
         $paginaAnterior.classList.add("disabled");
     }
-    $paginador.appendChild(crearItemPaginador("Prev.", urlAnterior))
+    $paginador.appendChild($paginaAnterior);
 
     for (let i = 0; i < totalPaginas; i += 1) {
         const numeroPagina = i + 1;
@@ -177,7 +219,7 @@ function mostrarPaginador(totalPokemones, paginaActual, urlAnterior, urlSiguient
         if (i === (paginaActual - 1)) {
             $pagina.classList.add("active");
         }
-        $paginador.appendChild($pagina)
+        $paginador.appendChild($pagina);
     }
 
     const $paginaSiguiente = crearItemPaginador("Next", urlSiguiente);
@@ -186,11 +228,11 @@ function mostrarPaginador(totalPokemones, paginaActual, urlAnterior, urlSiguient
         $paginaSiguiente.addEventListener("click", () => cambiarPagina(paginaActual + 1));
         $paginaSiguiente.classList.remove("disabled");
     } else {
-        $paginaSiguiente.classList.add("disabled")
+        $paginaSiguiente.classList.add("disabled");
     }
     $paginador.appendChild($paginaSiguiente);
 
-    $paginador.addEventListener("click", manejarCambioPagina)
+    $paginador.addEventListener("click", manejarCambioPagina);
 }
 
 function cambiarPagina(pagina) {
@@ -220,36 +262,7 @@ function cambiarPagina(pagina) {
     });
 }
 
-function toggleElementsBasedOnAyuda() {
-    const ayudaText = document.querySelector("#ayuda").innerText;
-    const elementsToToggle = [
-        document.querySelector("#pokemon-nombre"),
-        document.querySelector("#pokemon-id"),
-        document.querySelector("#pokemon-imagen"),
-        document.querySelector("#tipos-contenedor"),
-        document.querySelector("#habilidades-contenedor"),
-        document.querySelector('#moves'),
-    ];
-
-    const show = ayudaText !== "Select a Pokemon";
-
-    elementsToToggle.forEach((element) => {
-        element.style.display = show ? "block" : "none";
-    });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-    const ayudaElement = document.querySelector("#ayuda");
-
-    toggleElementsBasedOnAyuda();
-
-    ayudaElement.addEventListener("DOMSubtreeModified", () => {
-        toggleElementsBasedOnAyuda();
-    });
-});
-
-function iniciar() {
     cambiarPagina(1);
-}
-
-iniciar();
+    cargarPokemon("bulbasaur");
+});
