@@ -214,7 +214,7 @@ function mostrarPaginador(totalPokemones, paginaActual, urlAnterior, urlSiguient
         inicioPagina = Math.max(1, finPagina - MAX_PAGINAS_VISIBLES + 1);
     }
 
-    const $paginaAnterior = crearItemPaginador("Prev.", urlAnterior);
+    const $paginaAnterior = crearItemPaginador("<<<", urlAnterior);
 
     if (urlAnterior) {
         $paginaAnterior.classList.remove("disabled");
@@ -232,7 +232,7 @@ function mostrarPaginador(totalPokemones, paginaActual, urlAnterior, urlSiguient
         $paginador.appendChild($pagina);
     }
 
-    const $paginaSiguiente = crearItemPaginador("Next", urlSiguiente);
+    const $paginaSiguiente = crearItemPaginador(">>>", urlSiguiente);
 
     if (urlSiguiente) {
         $paginaSiguiente.addEventListener("click", () => cambiarPagina(paginaActual + 1));
