@@ -133,7 +133,7 @@ function cargarPokemon(nombre) {
         .then((r) => r.json())
         .then((pokemon) => {
             mostrarPokemon(pokemon);
-            actualizarTextoAyuda("");  // Una vez cargado, el texto de ayuda podría quedar vacío o mostrar otro mensaje
+            actualizarTextoAyuda(""); 
         })
         .catch((error) => {
             actualizarTextoAyuda("ERROR LOADING POKEMON");
@@ -199,7 +199,7 @@ function manejarCambioPagina(e) {
 
 function mostrarPaginador(totalPokemones, paginaActual, urlAnterior, urlSiguiente) {
     const POKEMONES_POR_PAGINA = 20;
-    const MAX_PAGINAS_VISIBLES = 10; // Máximo número de páginas visibles en el paginador
+    const MAX_PAGINAS_VISIBLES = 8; // Máximo número de páginas visibles en el paginador
     const $paginador = document.querySelector("#paginador");
     $paginador.innerHTML = "";
 

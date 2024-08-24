@@ -232,7 +232,7 @@ h1 {
 }
 
 .list-group {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -422,28 +422,30 @@ h1 {
 }
 
 @media (max-width: 1024px) {
-.card-img{
-    background-size: cover;
-}
-.list-group {
-    font-size: 0.8rem;
-}
+    .card-img {
+        background-size: cover;
+    }
 
-.card-img {
-    position: relative;
-    background-size: cover;
-    top: 3.5rem;
-}
+    .list-group {
+        font-size: 0.8rem;
+    }
 
-#tipos-contenedor, #habilidades-contenedor {
-    font-size: 1rem;
-    position: relative;
-    top: 5rem;
-}
+    .card-img {
+        position: relative;
+        background-size: cover;
+        top: 3.5rem;
+    }
 
-.paginador{
-    margin-right: 15rem;
-}
+    #tipos-contenedor,
+    #habilidades-contenedor {
+        font-size: 1rem;
+        position: relative;
+        top: 5rem;
+    }
+
+    .paginador {
+        margin-right: 15rem;
+    }
 }
 
 
@@ -474,13 +476,15 @@ h1 {
         font-size: 1.3rem;
         letter-spacing: 0.3rem;
     }
+
     .card-img {
         position: relative;
         background-size: cover;
         top: 3.5rem;
     }
 
-    #tipos-contenedor, #habilidades-contenedor {
+    #tipos-contenedor,
+    #habilidades-contenedor {
         font-size: 0.8rem;
         position: relative;
         top: 3.5rem;
@@ -499,21 +503,63 @@ h1 {
 
 
 @media (max-width: 480px) {
+    .list-group {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
-.title{
-    font-size: 2rem;
-}
+    .col-2 {
+        flex: 0 0 auto;
+        width: 30% !important;
+    }
 
-.pokemon-count {
-    font-size: 0.8rem;
-}
+    .col-5 {
+        width: 50% !important;
+        margin: 0;
+        padding: 0;
+    }
 
-#pokemon-nombre, #pokemon-id {
-    font-size: 0.8rem;
-}
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-.col-5 {
-    flex: 0 0 auto;
-    width: 100% !important;
-}
+    .card-body {
+        width: 140%;
+    }
+
+    .card-img {
+        border: 1rem solid black;
+    }
+
+    #tipos-contenedor, #habilidades-contenedor {
+        font-size: 0.7rem;
+    }
+
+
+    #contenedor-movimientos {
+        width: 200% !important;
+        
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .pokemon-count {
+        font-size: 0.8rem;
+    }
+
+    #pokemon-nombre,
+    #pokemon-id {
+        font-size: 0.8rem;
+    }
+
+    .paginador{
+        position: absolute;
+        bottom: 89%;
+    }
 }
