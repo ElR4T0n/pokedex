@@ -509,6 +509,7 @@ h1 {
         width: 100%;
         margin: 0;
         padding: 0;
+        height: auto;
     }
 
     .col-2 {
@@ -529,6 +530,7 @@ h1 {
 
     .card-body {
         width: 140%;
+        height: 70.1vh;
     }
 
     .card-img {
@@ -561,5 +563,9 @@ h1 {
     .paginador{
         position: absolute;
         bottom: 89%;
+    }
+
+    tbody, td, tfoot, th, thead, tr {
+        font-size: 0.5rem !important;
     }
 }
