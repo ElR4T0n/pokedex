@@ -232,6 +232,7 @@ h1 {
 }
 
 .list-group {
+    display:flex;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -241,7 +242,7 @@ h1 {
     text-decoration: none;
     background-color: #000000;
     border: 5px solid black;
-    border-radius: 0.50rem;
+    border-radius: 0.25rem;
     height: 44.5rem;
 }
 
@@ -420,6 +421,31 @@ h1 {
     padding: 0px !important;
 }
 
+@media (max-width: 1024px) {
+.card-img{
+    background-size: cover;
+}
+.list-group {
+    font-size: 0.8rem;
+}
+
+.card-img {
+    position: relative;
+    background-size: cover;
+    top: 3.5rem;
+}
+
+#tipos-contenedor, #habilidades-contenedor {
+    font-size: 1rem;
+    position: relative;
+    top: 5rem;
+}
+
+.paginador{
+    margin-right: 15rem;
+}
+}
+
 
 @media (max-width: 768px) {
     .title {
@@ -469,4 +495,25 @@ h1 {
         font-size: 0.5rem;
         margin-right: 11rem;
     }
+}
+
+
+@media (max-width: 480px) {
+
+.title{
+    font-size: 2rem;
+}
+
+.pokemon-count {
+    font-size: 0.8rem;
+}
+
+#pokemon-nombre, #pokemon-id {
+    font-size: 0.8rem;
+}
+
+.col-5 {
+    flex: 0 0 auto;
+    width: 100% !important;
+}
 }
