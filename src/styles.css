@@ -531,6 +531,7 @@ h1 {
     .card-body {
         width: 140%;
         height: 37rem;
+        background-size: 167%;
     }
 
     .card-img {
