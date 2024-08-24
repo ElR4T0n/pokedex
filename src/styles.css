@@ -509,7 +509,7 @@ h1 {
         width: 100%;
         margin: 0;
         padding: 0;
-        height: auto;
+        height: 37rem;
     }
 
     .col-2 {
@@ -530,7 +530,7 @@ h1 {
 
     .card-body {
         width: 140%;
-        height: 70.1vh;
+        height: 37rem;
     }
 
     .card-img {
