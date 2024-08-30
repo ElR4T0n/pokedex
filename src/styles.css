@@ -25,7 +25,7 @@ body {
     background-image: url(./img/pkmnbodybg.png);
     background-color: yellow;
     background-size: contain;
-    backdrop-filter: blur(0.5px);
+    backdrop-filter: blur(0.1px);
     background-color: black;
 }
 
@@ -250,27 +250,25 @@ h1 {
     position: relative;
     display: block;
     padding: 0.2rem 1rem;
-    /* color: #212529; */
     text-decoration: none;
-    /* background-color: #fff; */
     border: 1px solid rgba(0, 0, 0, .125);
 }
 
 .list-group-item-action {
     max-height: 35.6px;
-    color: rgb(255, 203, 5) !important;
+    color: rgb(241, 247, 181) !important;
     text-overflow: ellipsis;
     overflow: hidden;
     background-image: linear-gradient(90deg,
-            hsl(60, 100%, 95%) 0%,
-            hsl(0, 32%, 43%) 53%,
+            hsl(55deg, 99%, 66%),
+            hsl(0, 64%, 33%) 53%,
             hsl(0, 77%, 44%) 100%);
 
     transition: color 0.3s, text-shadow 0.3s, background-image 0.5s;
 }
 
 .list-group-item:hover {
-    color: rgb(247, 251, 0) !important;
+    color: rgb(254, 255, 223) !important;
     text-shadow: -1px 0 black, 0 5px black, 1px 0 black, 0 -1px black;
     background-image: linear-gradient(90deg,
             hsl(60, 100%, 67%) 0%,
@@ -335,7 +333,6 @@ h1 {
     align-items: center;
     color: rgb(0, 0, 0);
     text-decoration: none;
-    /* background-image: linear-gradient(to bottom, #d11800, #f45272, #f592c2, #eecdf1, #ffffff); */
     background-size: cover;
     text-align: center;
     justify-content: center;
@@ -381,8 +378,6 @@ h1 {
     border-radius: 0.5rem;
 }
 
-
-
 #contenedor-movimientos th {
     text-align: center;
     font-size: 0.7vw;
@@ -404,7 +399,6 @@ h1 {
 .row {
     margin: 0;
 }
-
 
 .col-2 {
 
@@ -447,7 +441,6 @@ h1 {
         margin-right: 15rem;
     }
 }
-
 
 @media (max-width: 768px) {
     .title {
@@ -500,7 +493,6 @@ h1 {
         margin-right: 11rem;
     }
 }
-
 
 @media (max-width: 480px) {
     .list-group {
